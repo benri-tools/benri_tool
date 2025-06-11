@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>電子レンジ加熱時間換算</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    :root {
+      --primary-color: #4f46e5;
+      --secondary-color: #e0e7ff;
+      --green-color: #10b981;
+      --green-hover: #059669;
+      --text-color: #1f2937;
+      --bg-color: #f9fafb;
+      --convert-color: #f59e0b;
+      --convert-hover: #d97706;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding: 1em;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    h1 {
+      color: var(--primary-color);
+      text-align: center;
+      margin: 0.5em 0 1em;
+      font-size: 1.5em;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+      display: block;
+    }
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em;
+      margin-bottom: 1em;
+    }
+    .button-group button {
+      flex: 1 1 calc(50% - 0.5em);
+      padding: 0.6em;
+      border: none;
+      border-radius: 8px;
+      background-color: #e5e7eb;
+      color: #111827;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #toWattButtons button {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+    #toWattButtons button:hover {
+      background-color: var(--green-hover);
+      color: white;
+    }
+    #toWattButtons button.active {
+      background-color: var(--green-color);
+      color: white;
+    }
+    .button-group button:hover {
+      background-color: #d1d5db;
+    }
+    .button-group button.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    button.convert-btn {
+      display: block;
+      width: 100%;
+      padding: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--convert-color);
+      color: white;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1em;
+      transition: background-color 0.3s ease;
+    }
+    button.convert-btn:hover {
+      background-color: var(--convert-hover);
+    }
+    #result {
+      margin-top: 1.5em;
+      font-size: 2em;
+      text-align: center;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+    .group-box {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 1em;
+      margin-bottom: 1em;
+      background-color: white;
+    }
+    .group-box label {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>電子レンジ加熱時間換算</h1>
+
+  <div class="group-box">
+    <label>元のワット数:</label>
+    <div class="button-group" id="fromWattButtons">
+      <button onclick="setWatt('from', 500)">500W</button>
+      <button onclick="setWatt('from', 600)">600W</button>
+      <button onclick="setWatt('from', 700)">700W</button>
+      <button onclick="setWatt('from', 800)">800W</button>
+    </div>
+
+    <label>元の時間（分）:</label>
+    <div class="button-group" id="minuteButtons">
+      <button onclick="setTime('min', 0)">0分</button>
+      <button onclick="setTime('min', 1)">1分</button>
+      <button onclick="setTime('min', 2)">2分</button>
+      <button onclick="setTime('min', 3)">3分</button>
+      <button onclick="setTime('min', 4)">4分</button>
+      <button onclick="setTime('min', 5)">5分</button>
+    </div>
+
+    <label>元の時間（秒）:</label>
+    <div class="button-group" id="secondButtons">
+      <button onclick="setTime('sec', 0)">0秒</button>
+      <button onclick="setTime('sec', 10)">10秒</button>
+      <button onclick="setTime('sec', 20)">20秒</button>
+      <button onclick="setTime('sec', 30)">30秒</button>
+      <button onclick="setTime('sec', 40)">40秒</button>
+      <button onclick="setTime('sec', 50)">50秒</button>
+    </div>
+  </div>
+
+  <div class="group-box">
+    <label>新しいワット数:</label>
+    <div class="button-group" id="toWattButtons">
+      <button onclick="setWatt('to', 500)">500W</button>
+      <button onclick="setWatt('to', 600)">600W</button>
+      <button onclick="setWatt('to', 700)">700W</button>
+      <button onclick="setWatt('to', 800)">800W</button>
+    </div>
+  </div>
+
+  <button class="convert-btn" onclick="convertTime()">換算する</button>
+
+  <div id="result"></div>
+
+  <script>
+    let fromWatt = 500;
+    let toWatt = 600;
+    let selectedMinutes = 1;
+    let selectedSeconds = 0;
+
+    function setWatt(type, value) {
+      if (type === 'from') {
+        fromWatt = value;
+      } else {
+        toWatt = value;
+      }
+      updateButtonStyles();
+    }
+
+    function setTime(type, value) {
+      if (type === 'min') {
+        selectedMinutes = value;
+      } else {
+        selectedSeconds = value;
+      }
+      updateButtonStyles();
+    }
+
+    function updateButtonStyles() {
+      document.querySelectorAll("#fromWattButtons button").forEach(btn => {
+        btn.classList.toggle("active", parseInt(btn.textContent) === fromWatt);
+      });
+      document.querySelectorAll("#toWattButtons button").forEach(btn => {
+        btn.classList.toggle("active", parseInt(btn.textContent) === toWatt);
+      });
+      document.querySelectorAll("#minuteButtons button").forEach(btn => {
+        btn.classList.toggle("active", btn.textContent.startsWith(selectedMinutes + "分"));
+      });
+      document.querySelectorAll("#secondButtons button").forEach(btn => {
+        btn.classList.toggle("active", btn.textContent.startsWith(selectedSeconds + "秒"));
+      });
+    }
+
+    function convertTime() {
+      const totalSeconds = selectedMinutes * 60 + selectedSeconds;
+      const convertedSeconds = totalSeconds * fromWatt / toWatt;
+
+      const convMin = Math.floor(convertedSeconds / 60);
+      const convSec = Math.round(convertedSeconds % 60);
+
+      document.getElementById("result").textContent = `計算後：${convMin} 分 ${convSec} 秒`;
+    }
+
+    updateButtonStyles();
+  </script>
+</body>
+</html>
