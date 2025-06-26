@@ -2,11 +2,12 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>電子レンジ加熱時間換算</title>
+  <title>電子レンジのワット数換算ツール｜加熱時間を自動で計算</title>
+  <meta name="description" content="500W・600W・700W・800Wの電子レンジワット数に対応。元の加熱時間を入力すると、ワット数を変えたときの時間を自動換算。コンビニ弁当を家庭で温めるときに便利なツールです。">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <style>
     :root {
-      --primary-color: #7c3aed; /* 紫 */
+      --primary-color: #7c3aed;
       --secondary-color: #e0e7ff;
       --green-color: #10b981;
       --green-hover: #059669;
@@ -14,7 +15,7 @@
       --bg-color: #f9fafb;
       --convert-color: #f59e0b;
       --convert-hover: #d97706;
-      --time-button-color: #93c5fd; /* 青 */
+      --time-button-color: #93c5fd;
       --time-button-hover: #60a5fa;
       --time-button-active: #3b82f6;
     }
@@ -52,6 +53,12 @@
       justify-content: space-between;
       margin-bottom: 1em;
     }
+    #minuteButtons {
+      margin-bottom: 3px;
+    }
+    #secondButtons .button-group button {
+      flex: 1 1 calc(33% - 0.5em);
+    }
     .button-group button {
       width: 23%;
       padding: 0.6em 0;
@@ -68,6 +75,7 @@
     }
     #fromWattButtons button.active {
       background-color: var(--primary-color);
+      color: white;
     }
     #toWattButtons button {
       background-color: #d1fae5;
@@ -132,8 +140,7 @@
   </style>
 </head>
 <body>
-  <h1>電子レンジ加熱時間換算</h1>
-
+  <h1>レンジのワット数を計算</h1>
   <div class="group-box">
     <label>元のワット数:</label>
     <div class="button-group" id="fromWattButtons">
@@ -142,9 +149,8 @@
       <button onclick="setWatt('from', 700)">700W</button>
       <button onclick="setWatt('from', 800)">800W</button>
     </div>
-
     <label>元の時間（分）:</label>
-    <div class="button-group" id="minuteButtons">
+    <div class="button-group" id="minuteButtons" style="row-gap: 6px;">
       <button onclick="setTime('min', 0)">0分</button>
       <button onclick="setTime('min', 1)">1分</button>
       <button onclick="setTime('min', 2)">2分</button>
@@ -154,9 +160,13 @@
       <button onclick="setTime('min', 6)">6分</button>
       <button onclick="setTime('min', 7)">7分</button>
     </div>
-
     <label>元の時間（秒）:</label>
-    <div class="button-group" id="secondButtons">
+    <div class="button-group" id="secondButtons" style="row-gap: 6px; gap: 0.5em;">
+      <style>
+        #secondButtons button {
+          width: 30%;
+        }
+      </style>
       <button onclick="setTime('sec', 0)">0秒</button>
       <button onclick="setTime('sec', 10)">10秒</button>
       <button onclick="setTime('sec', 20)">20秒</button>
@@ -165,7 +175,6 @@
       <button onclick="setTime('sec', 50)">50秒</button>
     </div>
   </div>
-
   <div class="group-box">
     <label>新しいワット数:</label>
     <div class="button-group" id="toWattButtons">
@@ -175,18 +184,26 @@
       <button onclick="setWatt('to', 800)">800W</button>
     </div>
   </div>
-
-  <button class="convert-btn" onclick="convertTime()">換算する</button>
-
+  <button class="convert-btn" onclick="convertTime()">加熱時間を計算する</button>
   <div id="result"></div>
-
   <script>
+    window.onload = () => {
+      fromWatt = parseInt(localStorage.getItem("fromWatt")) || 500;
+      toWatt = parseInt(localStorage.getItem("toWatt")) || 600;
+      selectedMinutes = parseInt(localStorage.getItem("selectedMinutes")) || 1;
+      selectedSeconds = parseInt(localStorage.getItem("selectedSeconds")) || 0;
+      updateButtonStyles();
+    };
     let fromWatt = 500;
     let toWatt = 600;
     let selectedMinutes = 1;
     let selectedSeconds = 0;
-
     function setWatt(type, value) {
+      if (type === 'from') {
+        localStorage.setItem("fromWatt", value);
+      } else {
+        localStorage.setItem("toWatt", value);
+      }
       if (type === 'from') {
         fromWatt = value;
       } else {
@@ -194,8 +211,12 @@
       }
       updateButtonStyles();
     }
-
     function setTime(type, value) {
+      if (type === 'min') {
+        localStorage.setItem("selectedMinutes", value);
+      } else {
+        localStorage.setItem("selectedSeconds", value);
+      }
       if (type === 'min') {
         selectedMinutes = value;
       } else {
@@ -203,7 +224,6 @@
       }
       updateButtonStyles();
     }
-
     function updateButtonStyles() {
       document.querySelectorAll("#fromWattButtons button").forEach(btn => {
         btn.classList.toggle("active", parseInt(btn.textContent) === fromWatt);
@@ -218,17 +238,13 @@
         btn.classList.toggle("active", btn.textContent.startsWith(selectedSeconds + "秒"));
       });
     }
-
     function convertTime() {
       const totalSeconds = selectedMinutes * 60 + selectedSeconds;
       const convertedSeconds = totalSeconds * fromWatt / toWatt;
-
       const convMin = Math.floor(convertedSeconds / 60);
       const convSec = Math.round(convertedSeconds % 60);
-
       document.getElementById("result").textContent = `計算後：${convMin} 分 ${convSec} 秒`;
     }
-
     updateButtonStyles();
   </script>
 </body>
