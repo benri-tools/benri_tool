@@ -55,6 +55,8 @@
     }
     #minuteButtons {
       margin-bottom: 3px;
+      row-gap: 6px;
+      gap: 0.5em;
     }
     #secondButtons .button-group button {
       flex: 1 1 calc(33% - 0.5em);
@@ -151,6 +153,7 @@
 <body>
   <h1>レンジのワット数を計算</h1>
   <div class="group-box">
+    <div class="group-box">
     <label>元のワット数:</label>
     <div class="button-group" id="fromWattButtons">
       <button onclick="setWatt('from', 500)">500W</button>
@@ -159,7 +162,7 @@
       <button onclick="setWatt('from', 800)">800W</button>
     </div>
     <label>元の時間（分）:</label>
-    <div class="button-group" id="minuteButtons" style="row-gap: 6px;">
+    <div class="button-group" id="minuteButtons">
       <button onclick="setTime('min', 0)">0分</button>
       <button onclick="setTime('min', 1)">1分</button>
       <button onclick="setTime('min', 2)">2分</button>
@@ -168,6 +171,10 @@
       <button onclick="setTime('min', 5)">5分</button>
       <button onclick="setTime('min', 6)">6分</button>
       <button onclick="setTime('min', 7)">7分</button>
+      <button onclick="setTime('min', 8)">8分</button>
+      <button onclick="setTime('min', 9)">9分</button>
+      <button onclick="setTime('min', 10)">10分</button>
+      <button onclick="setTime('min', 11)">11分</button>
     </div>
     <label>元の時間（秒）:</label>
     <div class="button-group" id="secondButtons" style="row-gap: 6px; gap: 0.5em;">
