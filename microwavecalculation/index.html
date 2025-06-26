@@ -121,11 +121,20 @@
       background-color: var(--convert-hover);
     }
     #result {
-      margin-top: 1.5em;
-      font-size: 2em;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 1em 2em;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 1000;
       text-align: center;
       color: var(--primary-color);
-      font-weight: bold;
+      max-width: 90vw;
+      word-break: keep-all;
+      display: none;
     }
     .group-box {
       border: 1px solid #d1d5db;
@@ -243,9 +252,20 @@
       const convertedSeconds = totalSeconds * fromWatt / toWatt;
       const convMin = Math.floor(convertedSeconds / 60);
       const convSec = Math.round(convertedSeconds % 60);
-      document.getElementById("result").textContent = `計算後：${convMin} 分 ${convSec} 秒`;
+      const resultBox = document.getElementById("result");
+      resultBox.innerHTML = `<div style="font-size: 0.9em; font-weight: normal;">加熱時間</div><div style="font-size: 2.4em; font-weight: bold;">${convMin}分${convSec}秒</div>`;
+      resultBox.style.display = "flex";
+      resultBox.style.flexDirection = "column";
+      resultBox.style.alignItems = "center";
+      resultBox.style.justifyContent = "center";
     }
     updateButtonStyles();
-  </script>
+  document.addEventListener('click', (e) => {
+      const resultBox = document.getElementById('result');
+      if ((resultBox.style.display === 'block' || resultBox.style.display === 'flex') && !resultBox.contains(e.target) && !e.target.classList.contains('convert-btn')) {
+        resultBox.style.display = 'none';
+      }
+    });
+</script>
 </body>
 </html>
