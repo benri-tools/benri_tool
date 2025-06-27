@@ -3,110 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>単位計算ツール｜K/M/G/T</title>
-  <meta name="description" content="キロ・メガ・ギガ・テラの単位を数字に計算するシンプルなツール。">
-  <meta name="keywords" content="単位計算, キロ, メガ, ギガ, テラ, K, M, G, T, 数値変換">
+  <title>単位計算ツール</title>
   <style>
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f9fafb;
-  color: #1f2937;
-  padding: 2em;
-  max-width: 600px;
-  margin: auto;
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fafb;
+      color: #1f2937;
+      padding: 1.5em;
+      max-width: 600px;
+      margin: auto;
+    }
 
-h1 {
-  color: #4f46e5;
-  text-align: center;
-  margin-bottom: 1em;
-}
+    h1 {
+      color: #4f46e5;
+      text-align: center;
+      margin-bottom: 1.5em;
+    }
 
-.input-area {
-  display: flex;
-  gap: 0.5em;
-  margin-bottom: 1em;
-  align-items: center;
-}
+    .input-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1em;
+    }
 
-input[type="number"] {
-  padding: 0.5em;
-  font-size: 0.95em;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  flex: 0.6;
-  text-align: right;
-}
+    .input-box {
+      flex: 1;
+    }
 
-.unit-buttons {
-  display: flex;
-  flex-direction: row;
-  gap: 0.3em;
-  flex-wrap: nowrap;
-}
+    .input-box input[type="number"] {
+      width: 100%;
+      padding: 0.8em;
+      font-size: 1.2em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-align: right;
+    }
 
-.unit-buttons button {
-  padding: 0.4em 0.4em;
-  border: none;
-  background-color: #e0e7ff;
-  color: #1f2937;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
-  font-size: 0.75em;
-  line-height: 1.2em;
-  width: 3.5em;
-}
+    .unit-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+    }
 
-.unit-buttons button:hover {
-  background-color: #c7d2fe;
-}
+    .unit-buttons button {
+      padding: 0.4em 0.6em;
+      border: none;
+      background-color: #e0e7ff;
+      color: #1f2937;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9em;
+      transition: background-color 0.2s ease;
+    }
 
-.unit-buttons button.active {
-  background-color: #6366f1;
-  color: white;
-}
+    .unit-buttons button:hover {
+      background-color: #c7d2fe;
+    }
 
-.result {
-  margin-top: 1em;
-  font-size: 1.1em;
-  background: white;
-  padding: 1em;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.05);
-  text-align: center;
-}
+    .unit-buttons button.active {
+      background-color: #6366f1;
+      color: white;
+    }
 
-/* レスポンシブ対応 */
-@media (max-width: 500px) {
-  .input-area {
-    flex-direction: column;
-    align-items: stretch;
-  }
+    .result {
+      margin-top: 2em;
+      background: white;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+      text-align: center;
+    }
 
-  input[type="number"] {
-    width: 100%;
-    flex: unset;
-  }
+    @media (max-width: 480px) {
+      .input-area {
+        flex-direction: row;
+        align-items: flex-start;
+      }
 
-  .unit-buttons {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .unit-buttons button {
-    width: 45%;
-    margin-bottom: 0.5em;
-  }
-}
-
+      .unit-buttons button {
+        font-size: 0.8em;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>単位計算ツール</h1>
   <div class="input-area">
-    <input type="number" id="baseValue" placeholder="数値を入力">
+    <div class="input-box">
+      <input type="number" id="baseValue" placeholder="数値を入力">
+    </div>
     <div class="unit-buttons">
       <button onclick="convert('K')">K<br>キロ</button>
       <button onclick="convert('M')">M<br>メガ</button>
@@ -115,6 +102,7 @@ input[type="number"] {
     </div>
   </div>
   <div class="result" id="resultBox"></div>
+
   <script>
     function convert(unit) {
       const value = parseFloat(document.getElementById('baseValue').value);
@@ -122,26 +110,17 @@ input[type="number"] {
         document.getElementById('resultBox').innerHTML = "数値を入力してください。";
         return;
       }
-      const powers = {
-        K: 1e3,
-        M: 1e6,
-        G: 1e9,
-        T: 1e12
-      };
-
+      const powers = { K: 1e3, M: 1e6, G: 1e9, T: 1e12 };
       const unitOrder = ['K', 'M', 'G', 'T'];
       const index = unitOrder.indexOf(unit);
       const baseValue = value * powers[unit];
-
       let results = `${value}${unit} は`;
       for (let i = index - 1; i >= 0; i--) {
         const lowerUnitValue = baseValue / powers[unitOrder[i]];
         results += `<br><strong>${lowerUnitValue.toLocaleString()}</strong> ${unitOrder[i]}`;
       }
       results += `<br><strong>${baseValue.toLocaleString()}</strong>`;
-
       document.getElementById('resultBox').innerHTML = results;
-
       document.querySelectorAll('.unit-buttons button').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
     }
