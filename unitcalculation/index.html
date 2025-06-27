@@ -7,20 +7,22 @@
   <meta name="description" content="キロ・メガ・ギガ・テラの単位を数字に計算するシンプルなツール。">
   <meta name="keywords" content="単位計算, キロ, メガ, ギガ, テラ, K, M, G, T, 数値変換">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9fafb;
-      color: #1f2937;
-      padding: 2em;
-      max-width: 600px;
-      margin: auto;
-    }
-    h1 {
-      color: #4f46e5;
-      text-align: center;
-      margin-bottom: 1em;
-    }
-   .input-area {
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+  padding: 2em;
+  max-width: 600px;
+  margin: auto;
+}
+
+h1 {
+  color: #4f46e5;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.input-area {
   display: flex;
   gap: 0.5em;
   margin-bottom: 1em;
@@ -56,22 +58,49 @@ input[type="number"] {
   line-height: 1.2em;
   width: 3.5em;
 }
-    .unit-buttons button:hover {
-      background-color: #c7d2fe;
-    }
-    .unit-buttons button.active {
-      background-color: #6366f1;
-      color: white;
-    }
-    .result {
-      margin-top: 1em;
-      font-size: 1.1em;
-      background: white;
-      padding: 1em;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.05);
-      text-align: center;
-    }
+
+.unit-buttons button:hover {
+  background-color: #c7d2fe;
+}
+
+.unit-buttons button.active {
+  background-color: #6366f1;
+  color: white;
+}
+
+.result {
+  margin-top: 1em;
+  font-size: 1.1em;
+  background: white;
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 500px) {
+  .input-area {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    flex: unset;
+  }
+
+  .unit-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .unit-buttons button {
+    width: 45%;
+    margin-bottom: 0.5em;
+  }
+}
+
   </style>
 </head>
 <body>
