@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>単位計算ツール｜K/M/G/T</title>
-  <meta name="description" content="キロ・メガ・ギガ・テラの単位を数字に計算するシンプルなツール。">
-  <meta name="keywords" content="単位計算, キロ, メガ, ギガ, テラ, K, M, G, T, 数値変換">
+  <title>単位計算ツール｜K/M/G/T/P</title>
+  <meta name="description" content="キロ・メガ・ギガ・テラ・ペタの単位を数字に計算するシンプルなツール。">
+  <meta name="keywords" content="単位計算, キロ, メガ, ギガ, テラ, ペタ, K, M, G, T, P, 数値変換">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -15,20 +15,32 @@
       max-width: 600px;
       margin: auto;
     }
-
-    h1 {
-      color: #4f46e5;
+    .header {
+      position: relative;
       text-align: center;
       margin-bottom: 1em;
     }
-
+    .header h1 {
+      color: #4f46e5;
+      font-size: 1.5em;
+      margin: 0;
+    }
+    .home-link {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .home-link img {
+      width: 36px;
+      height: 36px;
+    }
     .input-area {
       display: flex;
       flex-direction: column;
       align-items: stretch;
       gap: 0.5em;
     }
-
     input[type="number"] {
       padding: 0.8em;
       font-size: 1.4em;
@@ -36,16 +48,16 @@
       border-radius: 6px;
       text-align: right;
       width: 100%;
+      box-sizing: border-box;
     }
-
     .unit-buttons {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       gap: 0.5em;
     }
-
     .unit-buttons button {
-      flex: 1;
+      flex: 1 1 calc(20% - 0.5em);
       padding: 0.6em 0;
       border: none;
       background-color: #e0e7ff;
@@ -56,16 +68,13 @@
       font-size: 0.9em;
       line-height: 1.2em;
     }
-
     .unit-buttons button:hover {
       background-color: #c7d2fe;
     }
-
     .unit-buttons button.active {
       background-color: #6366f1;
       color: white;
     }
-
     .result {
       margin-top: 1.5em;
       font-size: 1.1em;
@@ -75,7 +84,6 @@
       box-shadow: 0 0 5px rgba(0,0,0,0.05);
       text-align: center;
     }
-
     @media (max-width: 480px) {
       input[type="number"] {
         font-size: 1.2em;
@@ -88,7 +96,12 @@
   </style>
 </head>
 <body>
-  <h1>単位計算ツール</h1>
+  <div class="header">
+    <a href="https://benri-tools.github.io/benri_tool/index.html" class="home-link">
+      <img src="https://benri-tools.github.io/benri_tool/assets/icons/home.png" alt="ホームに戻る">
+    </a>
+    <h1>単位計算ツール</h1>
+  </div>
   <div class="input-area">
     <input type="number" id="baseValue" placeholder="数値を入力">
     <div class="unit-buttons">
@@ -96,11 +109,20 @@
       <button onclick="convert('M')">M<br>メガ</button>
       <button onclick="convert('G')">G<br>ギガ</button>
       <button onclick="convert('T')">T<br>テラ</button>
+      <button onclick="convert('P')">P<br>ペタ</button>
     </div>
   </div>
   <div class="result" id="resultBox"></div>
-
   <script>
+    const powers = {
+      K: 1e3,
+      M: 1e6,
+      G: 1e9,
+      T: 1e12,
+      P: 1e15
+    };
+    const unitOrder = ['K', 'M', 'G', 'T', 'P'];
+
     function convert(unit) {
       const value = parseFloat(document.getElementById('baseValue').value);
       const resultBox = document.getElementById('resultBox');
@@ -110,23 +132,15 @@
         return;
       }
 
-      const powers = {
-        K: 1e3,
-        M: 1e6,
-        G: 1e9,
-        T: 1e12
-      };
-
-      const unitOrder = ['K', 'M', 'G', 'T'];
-      const index = unitOrder.indexOf(unit);
       const baseValue = value * powers[unit];
+      let results = `<strong>${value}${unit}</strong> は：`;
 
-      let results = `${value}${unit} は`;
-      for (let i = index - 1; i >= 0; i--) {
+      for (let i = unitOrder.indexOf(unit) - 1; i >= 0; i--) {
         const lowerUnitValue = baseValue / powers[unitOrder[i]];
         results += `<br><strong>${lowerUnitValue.toLocaleString()}</strong> ${unitOrder[i]}`;
       }
-      results += `<br><strong>${baseValue.toLocaleString()}</strong>`;
+
+      results += `<br><strong>${baseValue.toLocaleString()}</strong>（数値）`;
 
       resultBox.innerHTML = results;
 
