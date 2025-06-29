@@ -10,14 +10,13 @@
   <meta property="og:url" content="https://benri-tools.github.io/benri_tool/microwavecalculation/index.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEOに関係しない共通パーツを読み込む -->
-<div id="header-common"></div>
-  <script src="https://benri-tools.github.io/benri_tool/common/include.js" defer></script>
-  
 </head>
-
 <body>
+
+  <!-- ✅ ここでヘッダーを読み込む -->  
+  <div id="header-common"></div>
+
+  
 <div style="position: relative; text-align: center; margin: 0.5em 0;">
   <a href="https://benri-tools.github.io/benri_tool/index.html" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);">
     <img src="https://benri-tools.github.io/benri_tool/assets/icons/home.png" alt="ホームに戻る" style="width: 36px; height: 36px;">
@@ -147,6 +146,10 @@
     });
 </script>
 
-      <div id="footer-common"></div>
+  <!-- ✅ フッターここ -->
+  <div id="footer-common"></div>
+
+  <!-- ✅ include.js を最後に読み込む -->
+  <script src="https://benri-tools.github.io/benri_tool/common/include.js" defer></script>
 </body>
 </html>
