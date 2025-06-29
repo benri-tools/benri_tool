@@ -12,15 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEOに関係しない共通パーツを読み込む -->
-  <script>
-    fetch("https://benri-tools.github.io/benri_tool/common/header-common.html")
-      .then(res => res.text())
-      .then(html => {
-        const temp = document.createElement('div');
-        temp.innerHTML = html;
-        Array.from(temp.children).forEach(el => document.head.appendChild(el));
-      });
-  </script>
+<div id="header-common"></div>
+  <script src="https://benri-tools.github.io/benri_tool/common/include.js" defer></script>
+  
 </head>
 
 <body>
@@ -152,5 +146,7 @@
       }
     });
 </script>
+
+      <div id="footer-common"></div>
 </body>
 </html>
