@@ -1,101 +1,23 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>単位計算ツール｜K/M/G/T/P</title>
+  <title>単位計算ツール｜K/M/G/T/P｜Benri Tools</title>
   <meta name="description" content="キロ・メガ・ギガ・テラ・ペタの単位を数字に計算するシンプルなツール。">
   <meta name="keywords" content="単位計算, キロ, メガ, ギガ, テラ, ペタ, K, M, G, T, P, 数値変換">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9fafb;
-      color: #1f2937;
-      padding: 2em 1em;
-      max-width: 600px;
-      margin: auto;
-    }
-    .header {
-      position: relative;
-      text-align: center;
-      margin-bottom: 1em;
-    }
-    .header h1 {
-      color: #4f46e5;
-      font-size: 1.5em;
-      margin: 0;
-    }
-    .home-link {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-    .home-link img {
-      width: 36px;
-      height: 36px;
-    }
-    .input-area {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.5em;
-    }
-    input[type="number"] {
-      padding: 0.8em;
-      font-size: 1.4em;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      text-align: right;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .unit-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 0.5em;
-    }
-    .unit-buttons button {
-      flex: 1 1 calc(20% - 0.5em);
-      padding: 0.6em 0;
-      border: none;
-      background-color: #e0e7ff;
-      color: #1f2937;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.9em;
-      line-height: 1.2em;
-    }
-    .unit-buttons button:hover {
-      background-color: #c7d2fe;
-    }
-    .unit-buttons button.active {
-      background-color: #6366f1;
-      color: white;
-    }
-    .result {
-      margin-top: 1.5em;
-      font-size: 1.1em;
-      background: white;
-      padding: 1em;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.05);
-      text-align: center;
-    }
-    @media (max-width: 480px) {
-      input[type="number"] {
-        font-size: 1.2em;
-      }
-      .unit-buttons button {
-        font-size: 0.8em;
-        padding: 0.5em 0;
-      }
-    }
-  </style>
+  <meta property="og:title" content="単位計算ツール｜K/M/G/T/P｜Benri Tools">
+  <meta property="og:description" content="キロ・メガ・ギガ・テラ・ペタの単位を数字に計算するシンプルなツール。">
+  <meta property="og:image" content="https://benri-tools.github.io/benri_tool/assets/ogp.jpg">
+  <meta property="og:url" content="https://benri-tools.github.io/benri_tool/unitcalculation/index.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+  <!-- ✅ ここでヘッダーを読み込む -->  
+  <div id="header-common"></div>
+
+  
   <div class="header">
     <a href="https://benri-tools.github.io/benri_tool/index.html" class="home-link">
       <img src="https://benri-tools.github.io/benri_tool/assets/icons/home.png" alt="ホームに戻る">
@@ -148,5 +70,11 @@
       event.target.classList.add('active');
     }
   </script>
+  
+  <!-- ✅ フッターここ -->
+  <div id="footer-common"></div>
+
+  <!-- ✅ include.js を最後に読み込む -->
+  <script src="https://benri-tools.github.io/benri_tool/common/include.js" defer></script>
 </body>
 </html>
