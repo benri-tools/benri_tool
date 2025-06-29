@@ -2,26 +2,82 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>暮らしに便利なツール集｜Benri Tools</title>
   <meta name="description" content="電子レンジのワット数計算や生活に役立つ無料Webツールを紹介。日常生活のちょっとした不便を解消するシンプルで使いやすい便利ツール集。">
   <meta name="keywords" content="電子レンジ, レンジ, 加熱時間, ワット数, 計算, コンビニ弁当, 便利ツール, 無料ツール, 時間換算, 家事, 節約, 生活効率化">
-  <meta name="author" content="Benri Tools">
-
-  <!-- OGP -->
   <meta property="og:title" content="暮らしに便利なツール集｜Benri Tools">
   <meta property="og:description" content="電子レンジのワット数換算や日常に便利な無料Webツール集。生活をちょっと楽に、楽しくするための実用ツールを提供します。">
   <meta property="og:image" content="https://benri-tools.github.io/benri_tool/assets/ogp.jpg">
   <meta property="og:url" content="https://benri-tools.github.io/benri_tool/index.html">
-  <meta property="og:type" content="website">
-
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://benri-tools.github.io/benri_tool/index.html">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fafb;
+      color: #1f2937;
+      margin: 0;
+      padding: 1.5em;
+    }
+    h1 {
+      color: #4f46e5;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .tool-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .tool-item {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      padding: 1em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-left: 6px solid #4f46e5;
+      transition: transform 0.2s ease;
+    }
+    .tool-item:hover {
+      transform: translateY(-2px);
+    }
+    .tool-icon {
+      font-size: 2em;
+      margin-right: 1em;
+      color: #4f46e5;
+      display: flex;
+      align-items: center;
+    }
+    .tool-icon img {
+      width: 72px;
+      height: auto;
+    }
+    .tool-info {
+      text-decoration: none;
+    }
+    .tool-info div {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #1f2937;
+    }
+    .tool-info p {
+      margin: 0.3em 0 0;
+      font-size: 0.9em;
+      color: #6b7280;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2em;
+      font-size: 0.85em;
+      color: #9ca3af;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- 共通ヘッダー読み込み -->
-  <div id="header-common"></div>
- 
   <h1>暮らしに便利なツール集</h1>
   <div class="tool-list">
     <a href="https://benri-tools.github.io/benri_tool/microwavecalculation/index.html" class="tool-item" style="text-decoration: none;">
@@ -43,11 +99,8 @@
 
     <!-- 今後ツールを追加する場合は以下に追加 -->
   </div>
-
-  <!-- ✅ フッターもここ -->
-  <div id="footer-common"></div>
-
-  <!-- ✅ include.js を最後に読み込む -->
-  <script src="https://benri-tools.github.io/benri_tool/common/include.js" defer></script>
+  <footer>
+    &copy; 2025 Benri Tools
+  </footer>
 </body>
 </html>
