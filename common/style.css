@@ -1,10 +1,10 @@
 :root {
-  --primary-color: #4f46e5;     /* 見出しや強調文字 */
-  --secondary-color: #e0e7ff;   /* 背景用など */
-  --accent-color: #f59e0b;      /* 変換ボタンなど */
+  --primary-color: #4f46e5;
+  --secondary-color: #e0e7ff;
+  --accent-color: #f59e0b;
   --accent-hover: #d97706;
-  --text-color: #1f2937;        /* 標準テキスト */
-  --bg-color: #f9fafb;          /* 全体背景 */
+  --text-color: #1f2937;
+  --bg-color: #f9fafb;
   --button-color: #93c5fd;
   --button-hover: #60a5fa;
   --button-active: #3b82f6;
@@ -46,7 +46,6 @@ button {
   transition: background-color 0.2s ease;
 }
 
-/* === 汎用ボタンスタイル === */
 .convert-btn {
   display: block;
   width: 100%;
@@ -83,7 +82,6 @@ button {
   color: white;
 }
 
-/* === グループ化された入力エリア === */
 .group-box {
   background: white;
   border: 1px solid #d1d5db;
@@ -98,41 +96,44 @@ label {
   font-weight: bold;
 }
 
-/* === 共通ヘッダーのロゴ・戻るボタン === */
-.header {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  margin-bottom: 1.5em;
-}
-.home-link img {
-  width: 36px;
-  height: 36px;
+footer {
+  text-align: center;
+  font-size: 0.85em;
+  color: #9ca3af;
+  margin-top: 2em;
 }
 
-/* === 単位計算ツール用エリア === */
+/* 入力エリア */
 .input-area {
-  max-width: 500px;
-  margin: 0 auto;
   background: white;
   padding: 1em;
   border-radius: 8px;
+  max-width: 400px;
+  margin: 1em auto;
   box-shadow: 0 0 8px rgba(0,0,0,0.05);
 }
+.input-area input[type="number"] {
+  width: 100%;
+  padding: 0.5em;
+  font-size: 1em;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  margin-bottom: 1em;
+}
 
+/* 単位ボタン */
 .unit-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 1em;
   flex-wrap: wrap;
   gap: 0.5em;
 }
 .unit-buttons button {
-  flex: 1 1 30%;
+  flex: 1 1 calc(33.3% - 0.5em);
+  padding: 0.8em 0;
   background-color: var(--button-color);
   color: var(--text-color);
-  padding: 0.8em 0.5em;
   font-weight: bold;
+  text-align: center;
 }
 .unit-buttons button:hover {
   background-color: var(--button-hover);
@@ -142,73 +143,66 @@ label {
   color: white;
 }
 
-/* === 結果表示エリア === */
+/* 結果 */
 .result {
-  text-align: center;
-  margin-top: 1.5em;
-  font-size: 1.1em;
-  background-color: #fff;
-  padding: 1em;
+  margin: 1em auto;
+  max-width: 400px;
+  background-color: white;
   border-radius: 8px;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  padding: 1em;
+  text-align: center;
+  border: 1px solid #e5e7eb;
 }
 
-/* === トップページのツール一覧 === */
+/* ヘッダー（ホーム＋タイトル） */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+.header img {
+  width: 36px;
+  height: 36px;
+}
+.header h1 {
+  font-size: 1.3em;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* ツールリスト */
 .tool-list {
   display: flex;
   flex-direction: column;
   gap: 1em;
   max-width: 600px;
-  margin: 2em auto;
+  margin: auto;
 }
 .tool-item {
-  background: white;
+  display: flex;
+  align-items: center;
   padding: 1em;
   border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.05);
-  display: flex;
-  gap: 1em;
-  align-items: center;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 .tool-icon img {
   width: 48px;
   height: 48px;
+  margin-right: 1em;
 }
 .tool-info div {
   font-weight: bold;
-  font-size: 1.1em;
+  margin-bottom: 0.2em;
 }
 .tool-info p {
   font-size: 0.9em;
   color: #6b7280;
-  margin: 0.2em 0 0;
+  margin: 0;
 }
 
-/* 入力欄のスタイルを調整 */
-.input-area input[type="number"] {
-  width: 100%;
-  max-width: 300px;
-  padding: 0.5em;
-  font-size: 1em;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  margin-bottom: 1em;
-  box-sizing: border-box;
-}
-
-
-/* === フッター === */
-footer {
-  text-align: center;
-  font-size: 0.85em;
-  color: #9ca3af;
-  margin-top: 2em;
-}
-
-/* === レスポンシブ対応 === */
+/* レスポンシブ対応 */
 @media (max-width: 600px) {
   .button-group button,
   .unit-buttons button {
@@ -219,6 +213,6 @@ footer {
     text-align: center;
   }
   .tool-icon img {
-    margin-bottom: 0.5em;
+    margin: 0 0 0.5em 0;
   }
 }
