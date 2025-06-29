@@ -108,3 +108,47 @@ footer {
     flex: 1 1 48%;
   }
 }
+.tool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tool-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  padding: 1em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-left: 6px solid var(--primary-color);
+  transition: transform 0.2s ease;
+}
+.tool-item:hover {
+  transform: translateY(-2px);
+}
+
+.tool-icon {
+  font-size: 2em;
+  margin-right: 1em;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+}
+.tool-icon img {
+  width: 72px;
+  height: auto;
+}
+
+.tool-info div {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: var(--text-color);
+}
+.tool-info p {
+  margin: 0.3em 0 0;
+  font-size: 0.9em;
+  color: #6b7280;
+}
