@@ -1,11 +1,11 @@
 :root {
-  --primary-color: #4f46e5;     /* 見出しや強調文字 */
-  --secondary-color: #e0e7ff;   /* 背景用など */
-  --accent-color: #f59e0b;      /* 変換ボタンなど */
-  --accent-hover: #d97706;
-  --text-color: #1f2937;        /* 標準テキスト */
-  --bg-color: #f9fafb;          /* 全体背景 */
-  --button-color: #93c5fd;
+  --primary-color: #4f46e5;     /* メインの見出しや強調色 */
+  --secondary-color: #e0e7ff;   /* 背景色や装飾 */
+  --accent-color: #f59e0b;      /* ボタン・変換などのアクセント色 */
+  --accent-hover: #d97706;      /* ボタンホバー時 */
+  --text-color: #1f2937;        /* 通常のテキスト */
+  --bg-color: #f9fafb;          /* 背景色 */
+  --button-color: #93c5fd;      /* 汎用ボタン */
   --button-hover: #60a5fa;
   --button-active: #3b82f6;
 }
@@ -46,6 +46,9 @@ button {
   transition: background-color 0.2s ease;
 }
 
+/* ==========
+   各種ボタン
+   ========== */
 .convert-btn {
   display: block;
   width: 100%;
@@ -82,6 +85,9 @@ button {
   color: white;
 }
 
+/* ==========
+   コンテナ・グループ
+   ========== */
 .group-box {
   background: white;
   border: 1px solid #d1d5db;
@@ -96,18 +102,9 @@ label {
   font-weight: bold;
 }
 
-footer {
-  text-align: center;
-  font-size: 0.85em;
-  color: #9ca3af;
-  margin-top: 2em;
-}
-
-@media (max-width: 600px) {
-  .button-group button {
-    flex: 1 1 48%;
-  }
-}
+/* ==========
+   トップページのツール一覧
+   ========== */
 .tool-list {
   display: flex;
   flex-direction: column;
@@ -151,4 +148,32 @@ footer {
   margin: 0.3em 0 0;
   font-size: 0.9em;
   color: #6b7280;
+}
+
+/* ==========
+   フッター
+   ========== */
+footer {
+  text-align: center;
+  font-size: 0.85em;
+  color: #9ca3af;
+  margin-top: 2em;
+}
+
+/* ==========
+   レスポンシブ対応
+   ========== */
+@media (max-width: 600px) {
+  .button-group button {
+    flex: 1 1 48%;
+  }
+
+  .tool-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tool-icon {
+    margin-bottom: 0.5em;
+  }
 }
